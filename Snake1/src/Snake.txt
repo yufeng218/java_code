@@ -1,0 +1,37 @@
+
+MVC
+
+1、梳理类
+	Snake 蛇:
+		move()		移动
+		isEatSelf()	是否吃到食物
+		eatFood() 	吃食物
+		drawMe()	画蛇
+	
+	Food 食物：
+		isEatBySnake()	是否被蛇吃
+		drawMe()		画食物
+		
+	Ground 障碍物:
+		isEatBySnake()	是否被蛇碰到
+		drawMe()		画障碍物
+	
+	GamePanel 游戏面板:
+		display()	显示蛇、食物、障碍物
+		重写paintComponent()方法，增加键盘的监听器
+
+
+2、控制器
+	控制蛇、食物、障碍物：
+	监听器蛇是否碰到食物、自己、障碍物；
+	
+	控制器继承
+
+
+
+
+
+
+
+
+
