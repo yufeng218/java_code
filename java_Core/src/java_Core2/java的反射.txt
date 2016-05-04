@@ -1,0 +1,50 @@
+
+java的反射
+
+1.1、java.lang.Class (Class类型)
+  面向对象的原理中一般认为万事万物皆对象，那么类也是对象；
+ A类的对象表示  A a1 = new A(); a1即是A类的对象；
+
+ A类本身也是对象，是java.lang.Class类的对象，这个对象成为类的类类型；
+  如何表示呢？
+	三种表示方式：
+	a、类名.class来表示；
+	b、如果有对象存在可以直接: 对象.getClass() ；
+	c、Class.forName("类的全称");
+	      这种表示方法也代表了动态加载类，动态加载类是指在运行时刻加载类而非编译时刻加载；
+
+1.2 理解动态加载类的用法
+	将来功能性的类都是动态加载的而非静态加载的类；
+	
+1.3 Class类的常用方法
+	通过Class类就可以获取类的所有信息，包括方法、成员变量、构造函数。。。
+	
+2. 方法的反射(java.lang.reflect.Method)
+	2.1 如何获取某一个方法
+		方法的反射操作：method.invoke(对象,参数)；
+		很多时候根据方法名称调用方法；
+	
+3、成员变量的反射(java.lang.reflect.Field)
+	如何获取成员变量的反射操作
+	案例一：写一个方法public static void changeValue(Object obj)
+		    把obj的字符串成员变量的值都变成大写的，将int型的成员变量值加100；
+	案例二：写一个方法public static String getSql(Object obj)
+		  输出“insert into 类名 (属性1，属性2，...) values (?,?,...)”
+	
+4、构造函数的反射
+	如何获取构造函数的反射操作
+	Constructor con = c.getConstructor(new Class[]{});
+	
+5、数组的反射
+	
+	数组的类类型只和数组的维数和类型有关；
+	java中数组都是对象；
+	数组的类类型表示：对象.getClass()； 数组 维数.class；
+	java.lang.reflect.Array;
+	Array.getLength(Obj)；//返回数组的长度,int类型
+	
+	Class c = object.getClass();
+	c.isArray();		//判断object对象是否是数组,返回boolean类型
+	Array.get(object,index); //获取数组object中的元素；index为下标
+	
+	

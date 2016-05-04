@@ -1,0 +1,40 @@
+
+java.util.Map
+	|____ java.util.HashMap
+	|____ java.util.TreeMap
+	|____ java.util.HashTable
+
+1、java.util.HashMap(key/value)
+	1.1基本操作
+		(1)直接打印Map对象会打印：key的toString方法 = value的toString方法
+		(2)map.put(key,value); 增加元素，key,value都是Object get(key)得到value；
+		(3)map.containsKey(key); 是否包含有key；
+		(4)遍历：
+		 	遍历方式1：通过map.keySet()方法把Map中所有的key放入Set集合中，
+		 			然后遍历Set集合得到key，通过key获得value；
+		 	遍历方式2：放入HashMap集合中的key和value，
+		 			其实都被包装成Map.Entry这个内部类的属性；
+		 			(有一个键值对就存在一个Map.Entry的实例对象)
+					通过entrySet()方法就可以把这些实例对象放入Set集合中；
+		
+	1.2 通过泛型来实现基本操作
+		HashMap<String, User> hm = new HashMap<String, User>();
+		//遍历方式1
+		Set<String> s1 = hm.keySet();
+		for(String x : s1) {
+			System.out.println(x + "=" +hm.get(x));
+		}
+		
+		//遍历方式2
+		Set<Map.Entry<String, User>> s2 = hm.entrySet();
+		for(Map.Entry<String, User> x : s2) {
+			System.out.println(x.getKey() + "=" + x.getValue());
+		}
+	
+	1.3 map.put(key, value)；如果key相同，后面的value就会覆盖前面的；
+
+
+
+
+
+
