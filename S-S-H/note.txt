@@ -44,5 +44,12 @@ SSH的整合
 		<3> 在Struts2的配置文件中配置Action时，class属性指向该Action在IOC容器中的id;
 		
 4、完成功能
-
+	(1) 获取所有员工信息：若在Dao中只查询Employee的信息，没有查询Department的信息，而且Employ和Department还是使用的懒加载；
+		而页面上还要显示员工的部门信息，此时会出现懒加载异常，代理对象不能被初始化；
+		解决：
+			① 打开懒加载项，即在employee.hbm.xml中的lazy设置为flase;  --- 不推荐
+			② 获取employee时，使用迫切左外连接同时初始化关联的Department对象；
+				String hql = "from Employee e left outer join fetch e.department";
+			③ 使用OpenSessionInViewFilter: 在页面加载时开session(后面再提);
+	
 

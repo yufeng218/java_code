@@ -3,8 +3,19 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+	<bean id="employeeDao" class="com.my.ssh.dao.EmployeeDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="employeeService" class="com.my.ssh.service.EmployeeService">
+		<property name="employeeDao" ref="employeeDao"></property>
+	</bean>
+	
 	<bean id="employeeAction" 
 		class="com.my.ssh.actions.EmployeeAction" scope="prototype">
+		<property name="employeeService" ref="employeeService"></property>
 	</bean>
+	
+	
 	
 </beans>

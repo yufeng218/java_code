@@ -11,8 +11,10 @@
     <package name="default" namespace="/" extends="struts-default">
 		
 		<action name="emp-*" class="employeeAction" method="{1}">
-			<result name="{1}">index.jsp</result>
+			<result name="{1}" type="">/WEB-INF/views/emp-list.jsp</result>
 		</action>
+		
+		
 		
     </package>
 
