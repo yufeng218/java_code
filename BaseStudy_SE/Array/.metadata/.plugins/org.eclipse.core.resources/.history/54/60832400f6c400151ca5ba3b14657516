@@ -1,0 +1,10 @@
+package myDemon1;
+
+public class Outer 
+{
+	public String name;
+	class Inner
+	{
+		
+	}
+}

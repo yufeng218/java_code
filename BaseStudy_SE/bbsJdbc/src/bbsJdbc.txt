@@ -1,0 +1,185 @@
+
+1、会员管理模块(用户、权限、角色)
+	用户表(是某种角色)
+	权限表
+	角色表(拥有某些权限)
+	
+2、版面管理模块(主版面、子版面、版面可以上下移动)
+3、帖子回复
+4、站内搜索
+5、博客链接
+
+1、会员管理模块
+=============== 用户表的创建 ==================
+	create table my_user (
+	id_ varchar(45) not null,
+	loginName_ varchar(128) default null,
+	password_ varchar(128) default null,
+	eamil_ varchar(128) default null,
+	nickname_ varchar(128) default null,
+	gender_ varchar(16) default null,			---- 性别
+	avatar_ mediumblob,						---- 
+	signature_ varchar(255) default null,
+	registrationTime_ datetime default null,
+	lastVisitTime_ datetime default null,
+	lastVisitIpAddr_ varchar(50) default null,
+	topicCount_ int(11) default null,				---- 发表的帖子数
+	articleCount_ int(11) default null,			---- 发表的文章数(包含帖子回复)
+	locked_ bit(1) default null,					---- 用户是否被管理员锁定
+	autoLoginAuthKey_ varchar(128) default null, 	---- 自动登陆的验证
+	primary key (id_)
+) engin=InnoDB default charset=utf8;
+
+=============== 角色表的创建 ==================
+create table my_role(
+	id_ varchar(255) not null,
+	name_ varchar(64) default null,
+	description_ varchar(255) default null,
+	defaultForNewUser_ bit(1) default null,	---- 新用户是否给默认角色
+	primary key (id_)
+)	engine=InnoDB default charset=utf8;
+
+一个用户可以有多个角色,一个角色也可以被多个用户所拥有; 
+角色表和用户表是多对多的关系，所以需要使用第三张表来关联;
+
+create table 'my_user_role' (
+	'userId_' varchar(45) not null,
+	'roleId_' varchar(255) not null,
+	primary key ('userId_', 'roleId_')		---- 复合主键
+	key 'fk9c95cd553b7c6692' ('roleId_'),	
+	key 'fk9c95cd55e0a72a72' ('userId_'),	
+	constraint 'fk9c95cd553b7c6692' foreign key ('userId_') references 'my_user' ('id_')
+	constraint 'fk9c95cd55e0a72a72' foreign key ('roleId_') references 'my_role' ('id_')
+)	engine=InnoDB default charset=utf8;
+
+将来业务操作时就会有如下的操作:
+	1、根据用户查询该用户所拥有的角色;
+	2、根据角色查询哪些用户拥有该角色;
+	3、可以在用户表中添加集合存放角色，可以在角色表中添加集合存放用户;
+	
+-------------------------- 权限表  --------------------
+create table 'my_systemprivilege' (
+	'id_' varchar(255) not null,
+	'name_' varchar(255) default null,
+	'action_' varchar(64) default null,
+	'resource_' varchar(64) default null,
+	primary key ('id_')
+)	engine=InnoDB default charset=utf8;
+
+权限都定义好
+	插入数据到数据库
+
+一个角色可以拥有多个权限，一个权限可以被多个角色拥有，
+所以角色表和权限表示多对多的，需要通过第三张表建立该关系；
+
+-------------------------- 角色表和权限表关联的表  --------------------
+create table 'my_role_systemprivilege' (
+	'roleId_' varchar(255) not null,
+	'systemPrivilegeId_' varchar(255) not null,
+	primary key ('roleId_', 'systemPrivilegeId_'),
+	key 'fk70476c853b7c6692' ('roleId_'),
+	key 'fk70476c8558d7fed6' ('systemPrivilegeId_'),
+	constraint 'fk70476c853b7c6692' foreign key ('roleId_') references 'my_role' ('id_'),
+	constraint 'fk70476c8558d7fed6' foreign key ('systemPrivilegeId_') references 'my_systemprivilege' ('id_')
+)	engine=InnoDB default charset=utf8;
+
+经常操作查询角色有哪些权限，根据权限查询角色应该不会有这种操作;
+
+
+2、版面管理模块
+	板块、分类表，将来上下移动需要排序
+--------- 父板块 --------
+create table 'my_category' (
+	'id_' varchar(255) not null,
+	'name_' varchar(255) default null,
+	'order_' int(11) default null,
+	primary key ('id_')
+)	engine=InnoDB default charset=utf8;
+
+
+子版块(二级板块)属于某个父板块,主外键关系1:n
+子版块应该有帖子数、最新的帖子等等; 就需要和帖子表有关联，关联1:1,引用主键
+当然帖子表属于某个二级板块,一个板块有多个帖子,帖子和板块关系n:1
+
+创建子版块 ----->先不建立和帖子表的关系
+create table 'my_forum'(
+	'id_' varchar(255) not null,
+	'name_' varchar(255) default null,
+	'description_' varchar(255) default null,
+	'order_' int(11) default null,
+	'categroyId_' varchar(255) default null,		-----> 属于哪个父板块
+	'topicCount_' int(11) default null,				-----> 帖子的数目
+	'articleCount_' int(11) default null,			-----> 文章的数目
+	'lastTopicId_' varchar(255) default null,
+	'lastArticlePostTime_' datetime default null,
+	primary key ('id_'),
+	key 'fk903a938cce73292' ('categroyId_'),
+	constraint 'fk903a938cce73292' foreign key ('categroyId_') references 'my_category' ('id_')
+)	engine=InnoDB default charset=utf8;
+
+在Forum类中把Category的对象作为成员，代表该子版块属于哪个父板块;
+在Category类中添加集合，存放这个父板块的所有子版块;
+
+创建帖子表
+(帖子属于哪个版块，帖子是谁发的，帖子的回复数，帖子是几楼的)
+create table 'my_topic' (
+	'id_' varchar(255) not null,
+	'title_'varchar(255) default null,
+	'content_' text,
+	'authorId_' varchar(45) default null,
+	'postTime_' datetime default null,
+	'ipAddr_' varchar(16) default null,
+	'deleted_' bit(1) default null,
+	'type_' varchar(255) default null,
+	'forumId_' varchar(255) default null,
+	'replyCount_' int(11) default null,
+	'lastReplyId_' varchar(255) default null,
+	'lastArticlePostTime_' datetime default null,
+	'nextFloor_' int(11) default null,
+	primary key ('id_'),
+	key 'fk90ffd39a5ff9c116' ('forumId'),
+	key 'fk6899e4a141601cb290ffd39a' ('authorId_'),
+	constraint 'fk6899e4a141601cb290ffd39a' foreign key ('authorId_') references 'my_user' ('id_'),
+	constraint 'fk6899e4a141601cb290ffd39a' foreign key ('forumId') references 'my_forum' ('id_')
+)	engine=InnoDB default charset=utf8;
+
+修改子版块'my_forum'中的lastTopicId_的约束:
+/*alter table my_forum 
+add constraint FKL foreign key lastTopicId_ references my_topic (id_);*/
+
+创建回复表:
+	回复的哪个帖子，谁回复的;
+------------ 回复表 ---------
+create table my_reply(
+	id_ varchar(255) not null,
+	title_ varchar(255) default null,
+	content_ text,
+	authorId_ varchar(45) default null,
+	'postTime_' datetime default null,
+	'ipAddr_' varchar(50) default null,
+	'deleted_' bit(1) default null,
+	'floor_' int(11) default null,
+	topicId_ varchar(255) default null,
+	primary key (id_),
+	key 'fk90df1955af81e56' ('topicId_'),
+	key 'fk6899e4a141601cb290df1955' ('authorId_'),
+	constraint 'fk6899e4a141601cb290df1955' foreign key 'authorId_' references 'my_user' ('id_'),
+	constraint 'fk90df1955af81e56' foreign key 'topicId_' references 'my_topic' ('id_')
+);
+
+修改my_topic表中的lastReplyId_的约束:
+alter table my_topic add foreign key (lastReplyId_) references my_reply(id_)
+在Forum(帖子)类中添加Topic对象来代表最后一次发布的帖子(lastTopic);
+在Topic类中添加Reply对象代表最后一个回复的信息(lastReply);
+
+
+
+
+
+
+
+
+
+
+
+

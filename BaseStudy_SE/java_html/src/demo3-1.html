@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+ 	<meta charset="UTF-8">
+ 	<title>管理员增加页面</title>
+ </head>
+ <body>
+	<h1>增加管理员</h1>
+
+	<table summary="表格简介文本">
+		<tr>
+			<td>姓名:</td>
+			<td><input type="text"/></td>
+			<td><span>10个字符以内</span></td>
+		</tr>
+		<tr>
+			<td>密码:</td>
+			<td><input type="password"/></td>
+			<td><span>10个字符以内</span></td>
+		</tr>
+		<tr>
+			<td>性别:</td>
+			<td colspan="2">
+				<input type="radio" checked/>女士&nbsp;
+				<input type="radio"/>男士
+			</td>
+		</tr>
+		<tr>
+			<td>角色:</td>
+			<td>
+				<fieldset>
+					<legend>请选择</legend>
+					<input type="checkbox"/>超级管理员<br/>
+					<input type="checkbox"/>账单管理员
+				</fieldset>
+			</td>
+			<td><span>至少选择一个角色</span></td>
+		</tr>
+		<tr>
+			<td>图像:</td>
+			<td colspan="2">
+				<input type="file"/>
+			</td>
+		</tr>
+	</table>
+	
+	
+	
+ </body>
+</html>

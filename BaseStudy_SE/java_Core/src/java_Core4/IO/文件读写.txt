@@ -1,0 +1,61 @@
+java.IO包
+
+1、编码问题
+	a.一个字符串存入文本文件中 ----> 可以称为字符串的序列化
+	     从文件中读取字符串 ----> 可以认为是字符串的反序列化
+		文本文件中的内容都是以字节的方式呈现的。
+		GBK编码的文本文件中： 英文1个字节，中文占2个字节
+		utf-8编码的文本文件中：英文1个字节，中文3个字节；
+	b. 常用的编码方式
+		GBK、uft-8、utf-16be
+	
+
+2、java.io.File类  表示文件或目录
+
+
+
+3、以字节为单位的输入输出流
+	输入流：InputStream (读)
+			  |___ FileInputStream 把文件作为字节流进行读操作；
+			  |___ BufferedInputStream
+			  |___ PipedInputStream 
+			  |___ DataInputStream
+			  |___ System.in
+
+	输出流：OutputStream (写)
+			  |___ FileOutputStream 把文件作为字节流进行写操作；
+			  |___ BufferedOutputStream
+			  |___ PipedOutputStream
+			  |___ DataOutputStream
+			  |___ System.out
+			  
+	所有的IO操作都有IOEXceptoon
+	
+	3.1 FileInputStream
+	    read()方法每次只读取一个字节，若到达文件结尾则返回-1；
+	          对于单字节字符编码都没有问题，对于一个字符占用了多个字节的文字直接打印就会出现乱码；
+	          对于比较大的文件，读取效率比较低；
+
+4、以字符为单位的输入输出流
+	输入流：Reader
+			|___ InputStreamReader
+			|___ FileReader
+			|___ BufferedReader
+			
+	输出流：Writer
+			|___ OutputStreamWriter
+			|___ FileWrite
+			|___ BufferedWrite
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,51 @@
+
+网格布局：
+
+frame.setLayout(new GridLayout(2,3)); //网格布局，2行3列；
+frame.add(button1);
+frame.add(button2);
+frame.add(button3);
+frame.add(button4);
+frame.add(button4);
+frame.add(button6);
+frame.setVisible(true); //设置窗口为可看见的
+
+======================================================
+
+
+a. 面板提供了比窗体更丰富的操作（比如：画图等）
+   javax.swing.JPanel--->面板
+         a. 面板提供了比窗体更丰富的操作（比如：画图等）
+         b. 面板是没有边界的窗体（没有最大化、最小化等）
+         c. 习惯是在窗体上布局面板，面板上布局组件
+2. java事件机制
+   java中已经给所有的事件都分类了（和异常的原理很像）
+   一个事件产生，就产生了事件类的对象
+   给某个组件加事件操作就是要给这个组件加监听器
+   如何加监听器
+       事件类型                    监听器                    加监听器的方式
+    ActionEvent           ActionListener     addActionListener(ActionListener)
+   		XXXEvent              XXXListener      addXXXListener(XXXListener)
+    监听器都是接口，实现接口的方法，就是事件要做的事情
+   
+============================================================
+
+鼠标有两个监听器：
+    MouseListener        addMouseListener  
+    MouseMotionListener  addMouseMotionListener  
+
+	MouseListener       对应的适配器   MouseAdapter;
+	MouseMotionListener 对应的适配器   MouseMotionAdapter;
+
+例子：
+	addMouseMotionListener(new MouseMotionAdapter()){
+		public void mouseMoved(MouseEvent e){
+			//获取鼠标的坐标
+			System.out.printlin(e.getX() + ":" +e.getY());
+		}
+	}
+
+
+
+
+

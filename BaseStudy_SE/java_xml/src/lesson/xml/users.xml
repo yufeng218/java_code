@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<allusers>
+  <user>
+    <id>10001</id>
+    <name>zhangsan</name>
+    <pass>123456</pass>
+    <email>zhangsan@163.com</email>
+  </user>
+  <user>
+    <id>10002</id>
+    <name>wangwu</name>
+    <pass>654321</pass>
+    <email>wangwu@sina.com</email>
+  </user>
+</allusers>

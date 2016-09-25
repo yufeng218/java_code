@@ -1,0 +1,10 @@
+package myDemon1;
+
+public class demon 
+{
+	public static void main(String[] args) 
+	{
+
+	}
+
+}

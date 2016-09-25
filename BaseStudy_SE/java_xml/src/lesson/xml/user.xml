@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<alluser>
+  <id>10001</id>
+  <name type="home">zhangsan</name>
+  <passwd>123456</passwd>
+  <phone>15211111111</phone>
+  <email>zhangsan@163.com</email>
+</alluser>

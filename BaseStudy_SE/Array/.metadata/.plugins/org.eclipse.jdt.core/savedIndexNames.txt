@@ -1,0 +1,12 @@
+INDEX VERSION 1.127+E:\java_exam\Array\.metadata\.plugins\org.eclipse.jdt.core
+386068597.index
+3027333217.index
+1449862820.index
+1982478314.index
+557969308.index
+816657927.index
+4000107104.index
+1310834397.index
+384020993.index
+581681326.index
+3496214687.index

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<allquestions>
+  <question id="1">
+    <title>路口转弯过程中，持续开启转向灯，主要是因为什么？</title>
+    <options>
+      <option>让其他驾驶人知道您正在转弯</option>
+      <option>完成转弯动作前，关闭转向灯会对车辆造成损害</option>
+      <option>让其他驾驶人知道您正在超车</option>
+      <option>完成转弯动作前，关闭转向灯是习惯动作</option>
+    </options>
+    <answers>
+      <answer>0</answer>
+    </answers>
+    <score>3</score>
+    <level>2</level>
+  </question>
+  <question id="2">
+    <title>驾驶机动车通过铁路道口时，最高速度不能超过多少？</title>
+    <options>
+      <option>15公里/小时</option>
+      <option>20公里/小时</option>
+      <option>30公里/小时</option>
+      <option>40公里/小时</option>
+    </options>
+    <answers>
+      <answer>2</answer>
+    </answers>
+    <score>3</score>
+    <level>2</level>
+  </question>
+  <question id="3">
+    <title>行车中超越同向行驶的自行车时，下面不应该做？</title>
+    <options>
+      <option>让自行车先行</option>
+      <option>注意观察动态，减速慢行，留有足够的安全距离</option>
+      <option>连续鸣喇叭提醒其让路</option>
+      <option>持续鸣喇叭并加速超越</option>
+    </options>
+    <answers>
+      <answer>0</answer>
+      <answer>2</answer>
+      <answer>3</answer>
+    </answers>
+    <score>4</score>
+    <level>3</level>
+  </question>
+  <question id="4">
+    <title>驾驶机动车下陡坡时不得有哪些危险行为？</title>
+    <options>
+      <option>提前减挡</option>
+      <option>空挡滑行</option>
+      <option>低挡行驶</option>
+      <option>制动减速</option>
+    </options>
+    <answers>
+      <answer>1</answer>
+    </answers>
+    <score>5</score>
+    <level>3</level>
+  </question>
+  <question id="5">
+    <title>泥泞道路对安全行车的主要影响是什么？</title>
+    <options>
+      <option>行驶阻力变小</option>
+      <option>车轮极易滑转和侧滑</option>
+      <option>能见度低，视野模糊</option>
+      <option>路面附着力增大</option>
+    </options>
+    <answers>
+      <answer>1</answer>
+    </answers>
+    <score>5</score>
+    <level>3</level>
+  </question>
+  <question id="6">
+    <title>驾驶机动车时接打电话容易引发事故，以下原因正确的是什么?</title>
+    <options>
+      <option>单手握方向盘，对机动车控制力下降</option>
+      <option>驾驶人注意力不集中，不能及时判断危险</option>
+      <option>电话的信号会对汽车电子设备的运行造成干扰</option>
+      <option>驾驶人对路况观察不到位，容易导致操作失误</option>
+    </options>
+    <answers>
+      <answer>0</answer>
+      <answer>1</answer>
+      <answer>3</answer>
+    </answers>
+    <score>2</score>
+    <level>3</level>
+  </question>
+  <question id="7">
+    <title>夜间驾驶机动车在没有中心隔离设施或者没有中心线的道路上行驶，以下哪种情况下应当改用近光灯？</title>
+    <options>
+      <option>接近没有交通信号灯控制的交叉路口时</option>
+      <option>与对向机动车会车时</option>
+      <option>接近人行横道时</option>
+      <option>城市道路照明条件不良时</option>
+    </options>
+    <answers>
+      <answer>0</answer>
+    </answers>
+    <score>5</score>
+    <level>4</level>
+  </question>
+  <question id="8">
+    <title>以下哪项行为可构成危险驾驶罪？</title>
+    <options>
+      <option>闯红灯</option>
+      <option>无证驾驶</option>
+      <option>疲劳驾驶</option>
+      <option>醉驾</option>
+    </options>
+    <answers>
+      <answer>3</answer>
+    </answers>
+    <score>5</score>
+    <level>4</level>
+  </question>
+  <question id="9">
+    <title>在涉水路段跟车行驶时，不应当怎样做？</title>
+    <options>
+      <option>紧跟其后</option>
+      <option>超越前车，抢先通过</option>
+      <option>适当增加车距</option>
+      <option>并行通过</option>
+    </options>
+    <answers>
+      <answer>0</answer>
+      <answer>1</answer>
+      <answer>3</answer>
+    </answers>
+    <score>5</score>
+    <level>5</level>
+  </question>
+  <question id="10">
+    <title>遇后车发出超车信号后，只要具备让超条件不应怎样做？</title>
+    <options>
+      <option>迅速减速或紧急制动</option>
+      <option>让出适当空间加速行驶</option>
+      <option>主动减速并靠右侧行驶</option>
+      <option>靠道路右侧加速行驶</option>
+    </options>
+    <answers>
+      <answer>0</answer>
+      <answer>1</answer>
+      <answer>3</answer>
+    </answers>
+    <score>5</score>
+    <level>5</level>
+  </question>
+</allquestions>

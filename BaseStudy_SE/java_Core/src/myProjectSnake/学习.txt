@@ -1,0 +1,55 @@
+面向对象的贪吃蛇
+
+1、找类和对象
+	a.Snake 	蛇类
+	b.Food  	食物类
+	c.Ground 	障碍物类
+	d.GamePanel	面板类（显示蛇、食物、障碍物）
+
+2、找类的方法
+	2.1 Snake类
+	    move(); //移动;
+	    eatFood(Food food); //吃食物；
+	    changeDirection();  //改变方向
+	    drawMe();				//画自己
+	    isEatSelf();  		//蛇是否碰到自己
+	    
+	2.2 Food类
+		drawMe();
+	 	isEatBySnake(); 蛇是否碰到食物，
+
+	2.3 Ground类
+		drawMe();
+		isEatBySnake(); 蛇是否碰到障碍物;
+		
+	2.4 GamePanel类        显示蛇、食物、障碍物
+		display()
+		重写paintComponent方法
+	
+3、控制器Controller
+	3.1 其实贪吃蛇游戏就是控制Snake, Food, Ground, GamePanel;
+	    专门用控制器来控制这四个对象 ---> 作为成员并通过构造函数初始化;
+	3.2 控制器要能够控制蛇的移动主要是方向的改变
+		我们在操作的时候是通过键盘事件来控制,键盘事件由键盘监听控制,
+		那么我们的控制器首先需要是键盘的监听器,
+		所以我们让Controller继承KeyAdapter重写keyPressed方法
+	3.3  蛇每次移动都应该判断蛇是否碰到了自己、障碍物、食物等；
+		写一个监听器来监听以上三件事;
+		写一个接口SnakeListener
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

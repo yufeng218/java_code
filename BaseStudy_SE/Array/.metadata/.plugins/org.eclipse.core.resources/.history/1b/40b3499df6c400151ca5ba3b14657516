@@ -1,0 +1,20 @@
+package myDemon1;
+
+public class Outer 
+{
+	private int i;
+	
+	class Inner
+	{
+		private String name;
+		private int i;
+	}
+	
+	public int getI() {
+		return i;
+	}
+	public void setI(int i) {
+		this.i = i;
+	}
+	
+}

@@ -1,0 +1,11 @@
+
+
+5、Exception常用的方法
+    getMassage() 获取异常信息
+    toString() 异常类型 + Message
+    printStackTrace() 异常类型 + Message + 异常是在哪个类的哪个方法哪行
+
+ 例子：
+    e.getMessage()
+    e.printStackTrace()
+

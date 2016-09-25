@@ -1,0 +1,15 @@
+package myDemon1;
+
+public class demon 
+{
+	public static void main(String[] args) 
+	{
+		Outer p1 = new Outer();
+		p1.outerMethod();
+		
+		System.out.println("--------");
+		
+		Outer.Inner y2 = Outer.new Inner("lisi",16);
+	}
+
+}
