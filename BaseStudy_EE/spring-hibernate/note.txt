@@ -1,0 +1,19 @@
+P-148 Spring整合Hibernate
+1、Spring整合Hibernate的方面：
+	1、由Spring的IOC容器生成Hibernate的SessionFactory;
+	2、让Hibernate使用上Spring的声明式事务；
+
+2、整合步骤：
+	(1)加入Hibernate
+		<1>jar包
+			antlr-2.7.7.jar
+			dom4j-1.6.1.jar
+			hibernate-commons-annotations-4.0.2.Final.jar
+			hibernate-core-4.2.4.Final.jar
+			hibernate-jpa-2.0-api-1.0.1.Final.jar
+			javassist-3.15.0-GA.jar
+			jboss-logging-3.1.0.GA.jar
+			jboss-transaction-api_1.1_spec-1.0.1.Final.jar
+	(2)加入Spring
+		
+	(3)整合

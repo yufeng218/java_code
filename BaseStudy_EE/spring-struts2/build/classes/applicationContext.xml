@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+	<bean id="person" class="com.my.spring.struts2.beans.Person">
+		<property name="username" value="zhangsan"></property>
+	</bean>
+	
+	<bean id="personService"
+		class="com.my.spring.struts2.service.PersonService">
+	</bean>
+	
+	<!-- 
+		注意：在IOC容器中配置Struts2的Action时，需要配置bean的scop属性，
+			其值必须为prototype；（即非单例）
+			Struts2的Action是单例的，即每次的请求都要新创建一个Action；
+	 -->
+	<bean id="personAction" 
+		class="com.my.spring.struts2.action.PersonAction"
+		scope="prototype">
+		<property name="personService" ref="personService"></property>
+	</bean>
+	
+</beans>
