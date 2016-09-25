@@ -1,0 +1,48 @@
+SSH的整合
+
+1、加入Spring
+	(1) 加入jar包；
+	(2) 配置web.xml文件,加入监听器;；
+	(3) 加入Spring的配置文件,applicationContext.xml文件;;
+	
+2、加入Hibernate
+	(1) 加入jar包;
+	(2) 在类路径下面加入hibernate.cfg.xml文件,在其中配置hibernate的基本属性;
+	(3) 同时建立持久化类，和其对应的*.hbm.xml文件;
+	
+	(4) 加入c3p0和mysql的驱动jar包；
+	(5) 在Spring的配置文件中配置: 
+		<1> 数据源: db.properties文件导入、c3p0的数据源配置;
+		<2> sessionFactory: 使用LocalSessionFactoryBean类获取sessionFactory生成,
+				配置dataSource数据源属性，configLocation属性、mappingLocations属性;
+		<3> 可以启动工程，在数据库中会自动创建持久化类对应的数据表;
+		<4> 配置声明式事务:
+			 I. 配置hibernate的事务管理器: 使用HibernateTransactionManager类生成，
+			 	配置sessionFactory属性;
+			 II. 配置事务属性: 使用 <tx:advice> 标签配置；
+				 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+						<tx:attributes>
+							<tx:method name="get*" read-only="true"/>
+							<tx:method name="*"/>
+						</tx:attributes>
+					</tx:advice>
+			 III. 配置事务切入点、关联事务属性和事务切入点: 使用<aop:config> 标签；
+					<aop:config>
+						<aop:pointcut expression="execution(* com.my.ssh.service.*.*(..))" 
+							id="txPointcut"/>
+						<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>
+					</aop:config>
+	
+
+3、加入Struts2
+	(1) 加入jar包; 若有重复的jar包，删除版本低的；javassist-3.11.0.GA.jar
+	(2) 在web.xml文件中配置Struts2 的 Filter;
+	(3) 加入Struts2的配置文件: struts.xml文件;
+	(4) 整合Spring
+		<1> 加入Struts2的Spring插件的jar包；
+		<2> 在Spring文件中正常配置Action, 注意配置的Action的Bean的scope为prototype(不是单例的);
+		<3> 在Struts2的配置文件中配置Action时，class属性指向该Action在IOC容器中的id;
+		
+4、完成功能
+
+
