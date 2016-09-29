@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<!-- 导入jQuery库 -->
+		<script type="text/javascript" src="jquery.js"></script>
+		<script type="text/javascript">
+			
+			//$(function(){})相当于 window.onload
+			$(function(){
+				
+				//1.选取button: $("button")
+				//2、为button添加onclick响应函数
+				//3、弹出helloWorld
+				$("button").click(function(){
+					alert("helloWorld");
+				});
+				
+			//jQuery 和 DOM对象
+				// 1) 获取一个jQuery对象
+				var $btn = $("button");
+				// 2) jQury对象是一个数组
+				alert($btn.length);
+				// jQuery转为DOM对象
+				alert($btn[0].firstChild.nodeValue);
+				
+				
+			// DOM对象转为jQuery
+				var btn = document.getElementById("btn");
+				//使用$()进行包装
+				var $btn = $(btn);
+				alert("---" + $btn.text());
+				
+			});
+			
+		</script>
+	</head>
+	
+	<body>
+		
+		<button id="btn">ClickMe</button>
+		<br/>
+		<button>ClickMax</button>
+		
+	</body>
+	
+</html>
