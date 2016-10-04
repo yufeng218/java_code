@@ -1,0 +1,113 @@
+
+1、使用DOM操作进行DOM操作
+
+1）新建(元素、属性、文本)节点：直接使用$() 包装即可，返回值是一个JQuery对象；
+	var $auti = $("<li id='auti'>学习</li>");
+
+2) 把节点插入文档:
+	向每个元素的内部追加内容：
+	① append、appendTo: 把节点A插入为B的最后一个子节点
+		$(B).append($(A));
+		$(A).appendTo($(B));	
+	② prepend、prependTo:把节点A插入为B的第一个子节点
+	
+	向每个元素的之前或之后追加节点：
+	① before、insertbefore
+	
+	
+	② after、insertAfter
+	
+	
+3） 删除节点：
+	$("#bj").remove();
+	
+4） 清空节点：
+	$("#game").empty();
+	
+5) 克隆节点
+	//clone(true): 复制元素的同时也复制元素中的的事件 
+	$("#bj").clone(true).attr("id", "bj2").insertAfter($("#rl"));
+
+6) 替换节点
+	replaceWith(): 将所有匹配的元素都替换为指定的 HTML 或 DOM 元素
+	注意: 若在替换之前, 已经在元素上绑定了事件, 替换后原先绑定的事件会与原先的元素一起消失
+	
+7) 属性操作
+	方法都是一个函数实现获取和设置
+		attr(), html(), text(), val(), height(), width(), css()等。
+	removeAttr(): 删除指定元素的指定属性
+	
+	
+技术点之外：
+
+1). jQuery 对象可以进行隐式迭代: $("p").click(function(){...});
+	为选取的所有的 p 节点都添加了 click 响应函数. jQuery 对象本身就是一个 
+	DOM 对象的数组;
+	
+2). 在JQuery中显示迭代: 使用each()方法；
+
+	$(":checkbox[name='c']:checked").each(function(){
+						alert(this.value);
+	});
+	可以在显示迭代的响应函数的参数中通过index属性获取到正在遍历的对象的索引;
+	
+3). 在响应函数中, this 是一个 DOM 对象. 若想使用 jQuery 对象的方法
+	需要把其包装为 jQuery 对象: 使用 $() 把 this 包起来. 
+	
+4). text() 方法时一个读写的方法: 不加任何参数, 读取文本值; 加参数为
+	属性节点添加文本值(文本节点) (和 text() 类似的方法: attr(), val())
+				
+5). defaultValue: DOM 对象的属性, 可以获取表单元素的默认值；
+
+	
+6). 
+	<input type="text" id="address" value="请输入邮箱地址"><br>
+	
+	为 #address 添加 focus(获取焦点), blur(失去焦点) 响应函数
+	$(":text").focus(function(){
+		//2. 当获取焦点时, 若 #address 中是默认值
+		//(defaultValue 属性, 该属性是 DOM 对象的属性), 就使其值置为 ""
+		var val = $(this).val();
+		
+		if(val == this.defaultValue){
+			$(this).val("");
+		}
+	}).blur(function(){
+		//3. 失去焦点时, 若 #address 的值在去除前后空格后等于 ""
+		//则为其恢复默认值. 
+		var val = this.value;	
+		if($.trim(val) == ""){
+			this.value = this.defaultValue;
+		}
+	});
+	
+6) 通过 val() 给 radio(单选框) 赋值；
+	即便是为一组 radio 赋值, 参数中也应该使用数组. 使用一个值不起作用。 
+	$(":radio[name='r']").val(["radio2"]);
+	
+	
+7). 
+	val 不能直接获取 checkbox 被选择的值,若直接获取, 只能得到第一个被选择的值. 
+	因为 $(":checkbox[name='c']:checked") 得到的是一个数组. 
+	而使用 val() 方法只能获取数组元素的第一个值；
+	
+	若希望打印被选择的所有值, 需要使用 each 遍历. 
+	$(":checkbox[name='c']:checked").each(function(){
+		alert(this.value);
+	});
+	
+	而 raido 被选择的只有一个, 所以可以直接使用 val() 方法获取. 
+	alert($(":radio[name='r']:checked").val());	
+	
+	
+8).  同 JS 的响应函数一样, jQuery 对象的响应函数若返回 false,可以取消指定元素的默认行为. 
+	比如 submit, a 等
+
+9). val() 方法, 相当于 attr("value"), 获取表单元素的 value 属性值. 
+
+10). $.trim(str): 可以去除 str 的前后空格.
+
+11). jQuery 对象的方法的连缀: 调用一个方法的返回值还是调用的对象, 
+	于是可以在调用方法的后面依然调用先前的那个对象的其他方法. 
+	
+	
