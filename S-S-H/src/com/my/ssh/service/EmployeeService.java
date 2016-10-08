@@ -17,8 +17,12 @@ public class EmployeeService
 	public List<Employee> getAll()
 	{
 		List<Employee> employees = employeeDao.getAll();
-//		employees.clear();
 		return employees;
+	}
+	
+	public void delete(Integer id)
+	{
+		employeeDao.delete(id);
 	}
 	
 }

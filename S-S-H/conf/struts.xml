@@ -12,8 +12,14 @@
 		
 		<action name="emp-*" class="employeeAction" method="{1}">
 			<result name="{1}" type="">/WEB-INF/views/emp-list.jsp</result>
+			<!--  
+			<result name="delete" type="redirect">/emp-list</result>
+			-->
+			<result type="stream" name="delete">
+		        <param name="contentType">text/html</param>
+		        <param name="inputName">inputStream</param>
+		    </result>
 		</action>
-		
 		
 		
     </package>
