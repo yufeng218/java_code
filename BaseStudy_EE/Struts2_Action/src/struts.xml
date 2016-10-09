@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+   <package name="example" extends="struts-default" >
+   
+   	<action name="login" class="com.my.action.LoginAction2" >
+   		<result name="success">/WEB-INF/pages/login/success.jsp</result>
+   		<result name="input">/index.jsp</result>
+   	</action>
+   	
+   	<action name="user" class="com.my.action.UserAction" >
+   		<result name="loginOK">/WEB-INF/pages/login/loginOK.jsp</result>
+   		<result name="registerOK">/WEB-INF/pages/login/registerOK.jsp</result>
+   	</action>
+   	
+   	<!-- 通配符 -->
+   	<action name="*Action" class="com.my.action.UserAction" method="{1}">
+   		<result name="loginOK">/WEB-INF/pages/login/loginOK.jsp</result>
+   		<result name="registerOK">/WEB-INF/pages/login/registerOK.jsp</result>
+   	</action>
+   	
+   	
+   </package>
+
+</struts>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans    
+		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">  
+	
+	<bean id="helloW" class="com.my.bean.HelloWorld">
+		<property name="Name_new" value="Spring"></property>
+	</bean>
+	
+	<!-- ref参数：依赖的对象  -->
+	<bean id="uDisk" class="com.my.bean.UDisk"/>
+	<bean id="moveDisk" class="com.my.bean.MoveDisk" />
+	<bean id="computer" class="com.my.bean.Computer">
+		<property name="Usb" ref="uDisk"></property>
+	</bean>
+</beans>
