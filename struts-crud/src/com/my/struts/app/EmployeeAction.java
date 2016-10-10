@@ -37,9 +37,27 @@ public class EmployeeAction implements RequestAware, ModelDriven<Employee>
 		// 3、通过redirectAction 的方式响应结果给 emp-list
 		return "success";
 	}
+
+	public String edit()
+	{
+		// 1、获取请求参数 employeeId: employee.getEmployeeId()
+		// 2、根据employeeId 获取 Employee 对象
+		Employee emp = dao.get(employee.getEmployeeId());
+
+		// 3、 把栈顶对象的属性装配好: 此时栈顶对象是employee
+		// 目前的employee 对象只有 employeeId 属性，其他属性为 null
+		/*
+		 * struts2中表单回显时: 从值栈栈顶开始查找匹配的属性，若找到就添加到value 属性中;
+		 */
+		employee.setEmail(emp.getEmail());
+		employee.setFirstName(emp.getFirstName());
+		employee.setLastName(emp.getLastName());
+
+		return "edit";
+	}
 	
 	private Map<String, Object> request;
-	
+
 	@Override
 	public void setRequest(Map<String, Object> request)
 	{
