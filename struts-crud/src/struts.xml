@@ -6,7 +6,10 @@
 <struts>
 
 	<package name="default" namespace="/" extends="struts-default">
-
+		
+		<!-- 配置使用 paramsPrepareParamsStack 作为默认的拦截器栈 -->
+		<default-interceptor-ref name="paramsPrepareParamsStack"></default-interceptor-ref>
+		
 		<action name="emp-*" 
 			class="com.my.struts.app.EmployeeAction" method="{1}">
 			<result name="{1}">/emp-{1}.jsp</result>

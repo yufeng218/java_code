@@ -39,7 +39,7 @@
 					<td>${lastName }</td>
 					<td>${email }</td>
 					<td>
-						<a href="emp-edit.action">Edit</a>
+						<a href="emp-edit?employeeId=${employeeId }">Edit</a>
 					</td>
 					<td>
 						<a href="emp-delete.action?employeeId=${employeeId }">Delete</a>
