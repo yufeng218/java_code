@@ -6,12 +6,28 @@
 <struts>
 
 	<package name="default" namespace="/" extends="struts-default">
+
+		<!-- 
+			把paramsPrepareParamsStack拦截器栈中的 PrepareInterceptor 拦截器的 
+				alwaysInvokePrepare 属性值修改为false;
+			并将其重命名为myStack拦截器栈; 
+		 -->
+		<interceptors>
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="paramsPrepareParamsStack">
+					<param name="prepare.alwaysInvokePrepare">false</param>
+				</interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
 		
-		<!-- 配置使用 paramsPrepareParamsStack 作为默认的拦截器栈 -->
-		<default-interceptor-ref name="paramsPrepareParamsStack"></default-interceptor-ref>
-		
-		<action name="emp-*" 
-			class="com.my.struts.app.EmployeeAction" method="{1}">
+		<!-- 配置使用自定义的myStack 作为默认的拦截器栈  -->
+		<default-interceptor-ref name="myStack" />
+
+		<!-- 配置使用 paramsPrepareParamsStack 作为默认的拦截器栈 
+			<default-interceptor-ref name="paramsPrepareParamsStack"/>
+		-->
+		<action name="emp-*" class="com.my.struts.app.EmployeeAction"
+			method="{1}">
 			<result name="{1}">/emp-{1}.jsp</result>
 			<result name="success" type="redirectAction">emp-list</result>
 		</action>

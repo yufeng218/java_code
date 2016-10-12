@@ -6,14 +6,14 @@ import org.apache.struts2.interceptor.RequestAware;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ModelDriven;
+import com.opensymphony.xwork2.Preparable;
 
-public class EmployeeAction implements RequestAware, ModelDriven<Employee>
+public class EmployeeAction implements RequestAware, ModelDriven<Employee>, Preparable
 {
 	private Dao dao = new Dao();
 
-	private Employee employee;
-
-	private Integer employeeId;
+	private Employee employee;	//创建压入值栈栈顶的对象
+	private Integer employeeId;	//接收参数
 
 	public void setEmployeeId(Integer employeeId)
 	{
@@ -45,27 +45,40 @@ public class EmployeeAction implements RequestAware, ModelDriven<Employee>
 		// 3、通过redirectAction 的方式响应结果给 emp-list
 		return "success";
 	}
-
+	
+	/**
+	 * 为 save() 方法准备model
+	 */
+	public void prepareSave()
+	{
+		employee = new Employee();
+	}
+	
+	public String update()
+	{
+		dao.update(employee);
+		return "success";
+	}
+	
+	/**
+	 * 为 update() 方法准备model
+	 */
+	public void prepareUpdate()
+	{
+		employee = new Employee();
+	}
+	
 	public String edit()
 	{
-		// 1、获取请求参数 employeeId: employee.getEmployeeId()
-		// 2、根据employeeId 获取 Employee 对象
-		// Employee emp = dao.get(employee.getEmployeeId());
-
-		// 3、 把栈顶对象的属性装配好: 此时栈顶对象是employee
-		// 目前的employee 对象只有 employeeId 属性，其他属性为 null
-		/*
-		 * struts2中表单回显时: 从值栈栈顶开始查找匹配的属性，若找到就添加到value 属性中;
-		 */
-		// employee.setEmail(emp.getEmail());
-		// employee.setFirstName(emp.getFirstName());
-		// employee.setLastName(emp.getLastName());
-
-		// 手动的把从数据库中获取的employee对象放入到值栈的栈顶. 不够完美
-		// ActionContext.getContext().getValueStack()
-		// .push(dao.get(employee.getEmployeeId()));
-
 		return "edit";
+	}
+	
+	/**
+	 * 为 edit() 方法准备model
+	 */
+	public void prepareEdit()
+	{
+		employee = dao.get(employeeId);
 	}
 
 	private Map<String, Object> request;
@@ -79,22 +92,17 @@ public class EmployeeAction implements RequestAware, ModelDriven<Employee>
 	@Override
 	public Employee getModel()
 	{
-		// 判断是Create 还是 Edit
-		// 若为Create, 则employee = new Employee();
-		// 若为Edit, 则employee = dao.get(employee.getEmployeeId());
-		// 判断标准为是否有 employeeId这个参数, 有则为edit，无则为Create;
-		// 若函数通过 employeeId 来判断, 则需要在 modelDriven 拦截之前就执行一个params 拦截器!
-		// 而这个可以通过使用 paramsPrepareParams 拦截器栈实现,
-		// 则需要在 struts.xml 文件中配置使用 paramsPrepareParams 作为默认的拦截器栈;
-		if (employeeId == null)
-		{
-			employee = new Employee();
-		}
-		else
-		{
-			employee = dao.get(employeeId);
-		}
 		return employee;
+	}
+	
+	/**
+	 * prepare 方法的主要作用: 为getModel()方法准备 model 的;
+	 * @throws Exception
+	 */
+	@Override
+	public void prepare() throws Exception
+	{
+		//System.out.println("preapare");
 	}
 
 }
