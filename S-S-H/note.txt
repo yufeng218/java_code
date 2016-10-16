@@ -57,7 +57,10 @@ SSH的整合
 		② "确定要删除吗？"的提示使用JQuery完成;
 		③ Ajax的使用，参见/struts-2.3.30/docs/docs/ajax.html
 		
-		
+	(3) 添加员工:
+		① 显示表单页面: 需要先查询所有的部门信息;
+		② 使用struts2的 ModelDriven 和 Preparable 拦截器;
+		③ 时间是一个字符串，需要转为一个Date类型的对象;
 		
 		
 		

@@ -2,24 +2,14 @@ package com.my.ssh.dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.my.ssh.entities.Employee;
 
-public class EmployeeDao
+public class EmployeeDao extends BaseDao
 {
-	private SessionFactory sessionFactory;
-	
-	public void setSessionFactory(SessionFactory sessionFactory)
-	{
-		this.sessionFactory = sessionFactory;
-	}
-	
-	public Session getSession()
-	{
-		return sessionFactory.getCurrentSession();
-	}
 	
 	public List<Employee> getAll()
 	{
@@ -33,4 +23,20 @@ public class EmployeeDao
 		getSession().createQuery(hql).setInteger(0, id).executeUpdate();
 	}
 	
+	public void saveOrUpdate(Employee employee)
+	{
+		getSession().saveOrUpdate(employee);
+	}
+	
+	public Employee getEmployeeByLastName(String lastName)
+	{
+		String hql = "from Employee e where e.lastName = ?";
+		Query query = getSession().createQuery(hql).setString(0, lastName);
+		return (Employee) query.uniqueResult();
+	}
+	
+	public Employee get(Integer id)
+	{
+		return (Employee) getSession().get(Employee.class, id);
+	}
 }

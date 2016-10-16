@@ -25,4 +25,18 @@ public class EmployeeService
 		employeeDao.delete(id);
 	}
 	
+	public void saveOrUpdate(Employee employee)
+	{
+		employeeDao.saveOrUpdate(employee);
+	}
+	
+	public boolean lastNameIsVaild(String lastName)
+	{
+		return employeeDao.getEmployeeByLastName(lastName) == null;
+	}
+	
+	public Employee get(Integer id)
+	{
+		return employeeDao.get(id);
+	}
 }

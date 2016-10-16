@@ -64,17 +64,25 @@
 					<td>Email</td>
 					<td>Birth</td>
 					<td>createTime</td>
-					<td>dept</td>
-					<td>delete</td>
+					<td>Dept</td>
+					<td>Edit</td>
+					<td>Delete</td>
 				</tr>
 				<s:iterator value="#request.employees">
 					<tr>
 						<td>${id }</td>
 						<td>${lastName }</td>
 						<td>${email }</td>
-						<td>${birth }</td>
-						<td>${createTime }</td>
+						<td>
+							<s:date name="birth" format="yyyy-MM-dd"/>
+						</td>
+						<td>
+							<s:date name="createTime" format="yyyy-MM-dd hh:mm:ss"/>
+						</td>
 						<td>${department.departmentName }</td>
+						<td>
+							<a href="emp-input?id=${id }">修改</a>
+						</td>
 						<td>
 							<a href="emp-delete?id=${id }" class="delete">删除</a>
 							<input type="hidden" value="${lastName }"/>

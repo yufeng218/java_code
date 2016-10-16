@@ -23,6 +23,7 @@
 		<!-- 配置使用自定义的myStack 作为默认的拦截器栈  -->
 		<default-interceptor-ref name="myStack" />
 
+
 		<!-- 配置使用 paramsPrepareParamsStack 作为默认的拦截器栈 
 			<default-interceptor-ref name="paramsPrepareParamsStack"/>
 		-->
