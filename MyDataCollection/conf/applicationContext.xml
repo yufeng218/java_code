@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	
+	<!-- 导入资源文件 -->
+	<context:property-placeholder location="classpath:db.properties"/>
+	
+	<!-- 扫描组件 -->
+	<context:component-scan base-package="com.my.ssh.dao.impl,com.my.ssh.service.impl,com.my.ssh.action" />
+	
+	<!-- 配置c3p0数据源 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="user" value="${jdbc.user}"></property>
+		<property name="password" value="${jdbc.password}"></property>
+		<property name="driverClass" value="${jdbc.driverClass}"></property>
+		<property name="jdbcUrl" value="${jdbc.jdbcUrl}"></property>
+		
+		<property name="initialPoolSize" value="${jdbc.initPoolSize}"></property>
+		<property name="maxPoolSize" value="${jdbc.maxPoolSize}"></property>
+		<property name="minPoolSize" value="${jdbc.minPoolSize}"></property>
+		<property name="acquireIncrement" value="${jdbc.increment}"></property>
+	</bean>
+	
+	<!-- 配置SessionFactory -->
+	<bean id="sessionFactory" 
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		
+		<property name="configLocation" value="classpath:hibernate.cfg.xml"></property>
+		<property name="mappingLocations" value="classpath:com/my/ssh/model/*.hbm.xml"></property>
+	</bean>
+	
+	<!-- hibernate的事务管理器,用来在service层上实现事务管理，并达到平台无关性 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!-- 事务通知 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<!--
+				propagation: 事务的传播行为;
+				isolation: 事务隔离级别 ;
+			-->
+			<!-- 写操作 -->	
+			<tx:method name="save" propagation="REQUIRED" isolation="DEFAULT"/>
+			<tx:method name="update" propagation="REQUIRED" isolation="DEFAULT"/>
+			<tx:method name="delete" propagation="REQUIRED" isolation="DEFAULT"/>
+			<tx:method name="batch" propagation="REQUIRED" isolation="DEFAULT"/>
+			
+			<!-- 读操作 -->
+			<tx:method name="load*" propagation="REQUIRED" isolation="DEFAULT" read-only="true"/>
+			<tx:method name="get*" propagation="REQUIRED" isolation="DEFAULT" read-only="true"/>
+			<tx:method name="find*" propagation="REQUIRED" isolation="DEFAULT" read-only="true"/>
+			
+			<tx:method name="*" propagation="REQUIRED" isolation="DEFAULT"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	<!-- 事务的aop配置 -->
+	<aop:config>
+		<aop:advisor advice-ref="txAdvice" pointcut="execution(* com.my.ssh.service.impl.*.*(..))"/>
+	</aop:config>
+	
+	
+</beans>

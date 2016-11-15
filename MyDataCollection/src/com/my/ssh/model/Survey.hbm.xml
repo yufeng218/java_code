@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-10-28 22:01:36 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.my.ssh.model.Survey" table="surveys">
+    
+        <id name="id" column="id" type="integer">
+            <generator class="native" />
+        </id>
+        
+        <property name="title" column="title" type="string" length="200"/>
+        <property name="preText" column="preText" type="string" length="50"/>
+        <property name="nextText" column="nextText" type="string" length="50"/>
+        <property name="exitText" column="exitText" type="string" length="50"/>
+        <property name="doneText" column="doneText" type="string" length="50"/>
+        <property name="createTime" column="createTime" type="timestamp" />
+        
+        <!-- 映射从survey到user的多对一关系 -->
+        <many-to-one name="user" class="com.my.ssh.model.User" column="userId"/>
+        
+		<!-- 映射从Survey到Page之间一对多关联关系 -->
+		<set name="pages" inverse="true" order-by="id">
+			<key column="surveyId" />
+			<one-to-many class="com.my.ssh.model.Page"/>
+		</set>
+    </class>
+</hibernate-mapping>
