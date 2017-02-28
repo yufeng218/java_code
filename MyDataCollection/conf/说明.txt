@@ -171,9 +171,36 @@
 		...
 	</s:iterator>
 
+=======================================
+新建调查:
+1.导航栏 ---> [新建调查]
+2.SurveyAction.newSurvey():
+	public String newSurvey()
+	{
+		1、从session中获取user;
+		2、this.model = surveyService.newSurvey(user);// model回显
+			public Survey newSurvey(User user)
+			{
+				Survey s = new Survey();
+				Page p = new Page();
+				//双向关联的
+				p.setSurvey(s);	
+				s.getPages().add(p);
+				//先保存调查再存页面
+				surveyDao.saveEntity(s);
+				pageDao.saveEntity(p);
+				retutn s;
+			}
+		3、return "designSurveyPage";
+	}
+3.struts.xml配置文件:
+	<result name="designSurveyPage">/designSurvey.jsp</result>
+	
+4.跳转到/designSurvey.jsp页面;
 
 
-
+=====================================
+登录拦截器(自定义拦截器)
 
 
 

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script type="text/javascript" src="scripts/jquery.js"></script>
+		<script type="text/javascript">
+		
+			$(function(){
+				//alert($("#tb").find("tr").eq(3).find("td").eq(1).text());
+				//var $row = $("#tb tr");	
+				//alert('总行数: ' + $row.length);
+				
+				$("#dataCenter").bind("change", function(){
+					
+					var rowNum = $("#tb tr").length - 1;
+					var $tDcName = $(".tDcName");
+					for(var i = 0; i < rowNum; i++){
+						alert($tDcName.eq(i).text());//获取所有的td
+					}
+					
+				});
+				
+			});
+			
+			
+		
+		</script>
+	</head>
+	<body>
+		
+		<br/><br/><br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;
+		DC Name: <input id="dataCenter" type="text" placeholder="这里输入文字" size="22" />
+		
+		<br/>&nbsp;&nbsp;&nbsp;&nbsp;
+		<table id="tb" border="1" cellpadding="0" cellspacing="0">
+			<thead>
+				<th></th>
+				<th>DC Name</th>
+				<th>Department Name</th>
+				<th>Lab Name</th>
+			</thead>
+			<tbody align="center">
+				<tr>
+					<td><input type="radio" name="dc"/></td>
+					<td class="tDcName">e000_0311_0x_000</td>
+					<td>分组核心网</td>
+					<td>曼卡实验室03</td>
+				</tr>
+				<tr>
+					<td><input type="radio" name="dc"/></td>
+					<td class="tDcName">f000_0ll3_yy_111</td>
+					<td>EPC核心网</td>
+					<td>曼卡实验室02<t/d>
+				</tr>
+				<tr>
+					<td><input type="radio" name="dc"/></td>
+					<td class="tDcName">e900_0aa3_01_222</td>
+					<td>云产品</td>
+					<td>RTX实验室02<t/d>
+				</tr>
+			</tbody>
+			
+		</table>
+			
+	</body>
+</html>

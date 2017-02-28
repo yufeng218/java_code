@@ -38,6 +38,7 @@ public class SurveyAction extends BaseAction<Survey> implements SessionAware
 	}
 	
 	private Map<String, Object> sessionMap;
+	
 	/**
 	 * 	查询我的调查列表
 	 */
@@ -54,5 +55,15 @@ public class SurveyAction extends BaseAction<Survey> implements SessionAware
 		this.sessionMap = sessionMap;
 	}
 	
+	/**
+	 *  新建调查
+	 */
+	public String newSurvey()
+	{
+		//1、从session中获取user;
+		User user = (User) sessionMap.get("user");
+		this.model = surveyService.newSurvey(user);// model回显
+		return "designSurveyPage";
+	}
 	
 }

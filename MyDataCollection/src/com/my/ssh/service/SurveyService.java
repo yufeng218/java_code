@@ -15,4 +15,9 @@ public interface SurveyService
 	 * 查询调查的集合
 	 */
 	public List<Survey> findMySurveys(User user);
+	
+	/*
+	 * 新建调查
+	 */
+	public Survey newSurvey(User user);
 }

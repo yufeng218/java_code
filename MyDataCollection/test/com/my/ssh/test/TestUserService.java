@@ -6,31 +6,30 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.my.ssh.model.User;
+import com.my.ssh.service.SurveyService;
 import com.my.ssh.service.UserService;
 
 public class TestUserService
 {
-	private static UserService us;
+	private static SurveyService ss;
 	
 	@BeforeClass
 	public static void initUserService()
 	{
 		ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
-		us = (UserService) ac.getBean("userService");
-		System.out.println(us);
+		ss = (SurveyService) ac.getBean("surveyService");
+		System.out.println(ss);
 	}
 	
 	/**
-	 * 	插入用户
+	 * 	新建调查
 	 */
 	@Test
-	public void insertUser()
+	public void newSurvey()
 	{
 		User u = new User();
-		u.setEmail("zhangsan@163.com");
-		u.setName("zhangsan");
-		u.setNickName("drak");
-		us.saveEntity(u);
+		u.setId(4);
+		ss.newSurvey(u);
 	}
 	
 }

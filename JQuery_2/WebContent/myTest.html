@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Insert title here</title>
+		<style type="text/css">
+			div {
+				float : left;
+			}
+			
+			#first div {
+				color : red;
+				width : 30%;
+			}
+			
+		</style>
+		<script type="text/javascript" src="scripts/jquery.js"></script>
+		<script type="text/javascript">
+		
+			$(function(){
+				onDeptChange();
+				
+			});
+			
+			function onDeptChange()
+			{
+				$("#dept").bind("change", function(){
+					//alert("sdsdsd")
+					var data = $(this).val();
+					//alert(data); 
+					//ajax请求
+					// 胖子 矮子 瘦子  老师 学生 主任 小学 初中 高中 大学
+					var $dst = $("#first");
+					var arr = ['胖子', '矮子', '瘦子','老师', '学生','主任','小学','初中','高中','大学'];
+					$dst.empty();
+					
+					$.each(arr, function(key, value){
+						//alert(value);
+						$dst.append('<div>' +
+										'<input type="radio" name="dc"/>' + value +
+									'</div>');
+					});
+						
+				});
+			}
+			
+		</script>
+	</head>
+	<body>
+		
+		<br/><br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;
+		<!--
+			研发部
+				实验室1-1 张三 李四 王五
+				实验室3-1 苹果 香蕉 鸭梨 
+				实验室5-1 化学 数学 英语
+			人事部
+				实验室2-1 胖子 矮子 瘦子
+				实验室4-1 老师 学生 主任
+				实验室6-1 小学 初中 高中 大学
+			行政部
+				实验室3-1 
+				实验室4-1 
+				实验室5-1 
+			测试部
+				实验室5-1 
+				实验室6-1 
+		-->
+		Department Name:
+		<select id="dept" name="dept" >
+			<option>研发部</option>
+			<option>人事部</option>
+			<option>行政部</option>
+			<option>测试部</option>
+		</select>
+		
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		
+		Lab Name:
+		<select id="lab" name="lab">
+			<option>实验室1-1</option>
+			<option>实验室2-1</option>
+			<option>实验室3-1</option>
+			<option>实验室4-1</option>
+			<option>实验室5-1</option>
+			<option>实验室6-1</option>
+		</select>
+		
+		<br/><br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;
+		
+		
+		<div id="first">
+			<div>
+				<input type="radio" name="dc"/>vbvbcvv
+			</div>
+			<div>
+				<input type="radio" name="dc"/>vbvbcvvcbcvbcvbvcbfgfgf
+			</div>
+			<div>
+				<input type="radio" name="dc"/>vbvbcvvcbcb
+			</div>
+			<div>
+				<input type="radio" name="dc"/>vbvbcvvbcvbrrrrrrrrrrrrrrrrrrrrrrrvcb
+			</div>
+			<div>
+				<input type="radio" name="dc"/>vbvbcvvbcvbvcb
+			</div>
+			<div>
+				<input type="radio" name="dc"/>vbvbcvvcbcvbcvbvcbfgfgf
+			</div>
+			<div>
+				<input type="radio" name="dc"/>vbvbcvvtycbcb
+			</div>
+			<div>
+				<input type="radio" name="dc"/>vbvbcvvggggbcvbvcb
+			</div>
+			<div>
+				<input type="radio" name="dc"/>vbvbvcfffffb
+			</div><div>
+				<input type="radio" name="dc"/>vbvbvcb
+			</div><div>
+				<input type="radio" name="dc"/>vbvbvcb
+			</div><div>
+				<input type="radio" name="dc"/>vbvbvcb
+			</div><div>
+				<input type="radio" name="dc"/>vbvbvcb
+			</div><div>
+				<input type="radio" name="dc"/>vbvbvcb
+			</div><div>
+				<input type="radio" name="dc"/>vbvbvcb
+			</div>
+		</div>
+	</body>
+</html>

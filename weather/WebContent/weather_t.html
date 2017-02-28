@@ -1,0 +1,159 @@
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#result{width: 800px;border:1px solid #ddd;margin-top: 30px;background: #aaa;display: none;}
+		#result p{height: 25px;line-height: 25px;padding-left: 20px;color: #fff;font-weight: bold;font-size: 16px;}
+		#result p span{padding: 0 10px;display: inline-block;width: 120px;text-align:center;height: 25px;line-height: 25px;}
+		#result p span.temp{width: 250px;text-align: left;margin-left: 20px;}
+	</style>
+
+	<script src="plugin/jquery.min.js"></script>
+	<script>
+
+		$(function(){
+			$(window).on(‘load‘,function(){
+				$.ajax({
+					‘type‘:‘get‘,
+					‘url‘:‘http://apis.baidu.com/heweather/weather/free?city=beijing‘,
+					‘headers‘:{‘apikey‘:‘2c6d2927ef76200697018e989f6afbbb‘},
+					‘success‘:function(data){
+						$(‘#result‘).show();
+						data = data[‘HeWeather data service 3.0‘][0];
+						var basic_info = ‘城市：‘ + data.basic.cnty + ‘&nbsp;‘ + data.basic.city;
+						var tianqi = data.daily_forecast;
+						$(‘<p><strong>‘ + basic_info + ‘</strong></p>‘).appendTo(‘#result‘);
+						$(‘<p><span>日期</span><span>气温</span><span class="temp">天气</span></p>‘).appendTo(‘#result‘);
+						$.each(tianqi,function(index,element){
+
+							var html = ‘‘;
+
+							var date = element.date;
+
+							var temperature = element.tmp.min + ‘&#176;C - ‘ + element.tmp.max + ‘&#176;C‘;
+
+							var w1 = element.cond.txt_d;
+
+							var w2 = element.cond.txt_n;
+
+							var weather;
+
+							if(w1 == w2){
+
+								weather = w1;
+
+							}
+
+							else{
+
+								weather = w1 + ‘ 转 ‘ + w2;
+
+							}
+
+							html += ‘<span>‘+ date +‘</span>‘ + ‘<span>‘+ temperature +‘</span>‘ + ‘<span class="temp">‘+ weather +‘</span>‘;
+
+							$(‘<p>‘+ html +‘</p>‘).appendTo(‘#result‘);
+
+						});
+
+					}
+
+				});
+
+			});
+
+
+
+			$(‘#query‘).on(‘click‘,function(){
+
+				$(‘#result‘).hide().empty();
+
+				var city = $.trim($(‘#city‘).val());
+
+				$.ajax({
+
+					‘type‘:‘get‘,
+
+					‘url‘:‘http://apis.baidu.com/heweather/weather/free‘,
+
+					‘data‘:{‘city‘:city},
+
+					‘headers‘:{‘apikey‘:‘2c6d2927ef76200697018e989f6afbbb‘},
+
+					‘success‘:function(data){
+
+						$(‘#city‘).val(‘‘);
+
+						data = data[‘HeWeather data service 3.0‘][0];
+
+						console.log(data);
+
+						var basic_info = ‘城市：‘ + data.basic.cnty + ‘&nbsp;‘ + data.basic.city;
+
+						var tianqi = data.daily_forecast;
+
+						$(‘<p><strong>‘ + basic_info + ‘</strong></p>‘).appendTo(‘#result‘);
+
+						$(‘<p><span>日期</span><span>气温</span><span>天气</span></p>‘).appendTo(‘#result‘);
+
+						$.each(tianqi,function(index,element){
+
+							var html = ‘‘;
+
+							var date = element.date;
+
+							var temperature = element.tmp.min + ‘℃ - ‘ + element.tmp.max + ‘℃‘;
+
+							var w1 = element.cond.txt_d;
+
+							var w2 = element.cond.txt_n;
+
+							var weather;
+
+							if(w1 == w2){
+
+								weather = w1;
+
+							}
+
+							else{
+
+								weather = w1 + ‘ 转 ‘ + w2;
+
+							}
+
+							html += ‘<span>‘+ date +‘</span>‘ + ‘<span>‘+ temperature +‘</span>‘ + ‘<span>‘+ weather +‘</span>‘;
+
+							$(‘<p>‘+ html +‘</p>‘).appendTo(‘#result‘);
+
+							$(‘#result‘).show();
+
+						});
+
+					}
+
+				});
+
+			});
+
+		});
+
+	</script>
+
+</head>
+
+<body>
+
+	<input type="text" placeholder="请输入城市" id="city" />
+
+	<input type="button" value="查询" id="query" />
+
+	<div id="result"></div>
+
+	
+
+</body>
+
+</html>
